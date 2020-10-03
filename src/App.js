@@ -6,16 +6,35 @@ import DashBoard from "./Assignment7/WeatherDashboard";
 import axios from "axios";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.setState({});
-  }
+  state = {
+    Latitude: undefined,
+    Longitude: undefined
+  };
 
+  getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.getCoordinates);
+    } else {
+      ("Geolocation is not supported in your browser");
+    }
+  };
+
+  getCoordinates = (position) => {
+    // alert(`${position.coords.latitude}`)
+    this.setState({
+      Latitude: position.coords.latitude,
+      Longitude: position.coords.longitude
+    });
+  };
   render() {
+    // {
+    //   this.getLocation();
+    // }
     return (
       <div className="App">
+        <button onClick={this.getLocation}>Get Location</button>
         <Header />
-        <DashBoard />
+        <DashBoard Location={this.state} />
       </div>
     );
   }
