@@ -12,13 +12,12 @@ class DashBoard extends Component {
     Temperature: undefined,
     Condition: undefined,
     Description: undefined,
-    Date: undefined,
+    Icon: undefined,
+    Time: undefined,
     Error: undefined
   };
 
   getWeather = async (e) => {
-    
-
     //var time = `${date}`.split(" GMT")[0];
     const Lat = this.props.Location.Latitude;
     const Long = this.props.Location.Longitude;
@@ -35,7 +34,8 @@ class DashBoard extends Component {
       Temperature: data.main.temp,
       Condition: data.weather[0].main,
       Description: data.weather[0].description,
-     
+      Icon: data.weather[0].icon,
+      Time: data.dt,
       Error: undefined
     });
   };
@@ -49,7 +49,7 @@ class DashBoard extends Component {
         <p>{this.props.Location.Longitude}</p>*/}
         <button onClick={this.getWeather}>Get Weather</button>
         <CurrentDisplay Weather={this.state} />
-        <DailyDisplay />
+        <DailyDisplay Daily={this.state} />
         <HourlyDisplay />
       </div>
     );
