@@ -1,0 +1,30 @@
+.header {
+  font-size: 34px;
+  color: white;
+  background-color: #303030;
+  height: 70px;
+  width: 330px;
+  text-align: center;
+}
+
+.dashboard {
+  background-color: #d3d3d3;
+  height: 570px;
+  width: 330px;
+}
+
+.current {
+  background-color: #d8dce0;
+  height: 210px;
+  width: 330px;
+}
+.daily {
+  background-color: #b1b9c2;
+  height: 180px;
+  width: 330px;
+}
+.hourly {
+  background-color: #708090;
+  height: 180px;
+  width: 330px;
+}
