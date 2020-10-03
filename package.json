@@ -9,9 +9,12 @@
   "main": "src/index.js",
   "dependencies": {
     "axios": "0.20.0",
+    "moment": "2.29.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-scripts": "3.4.3"
+    "react-native-web": "0.13.14",
+    "react-scripts": "3.4.3",
+    "react-time": "4.3.0"
   },
   "devDependencies": {
     "typescript": "3.8.3"

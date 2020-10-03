@@ -4,6 +4,7 @@ import Header from "./Assignment7/Header";
 import "./Assignment7/MyStyleSheet.css";
 import DashBoard from "./Assignment7/WeatherDashboard";
 import axios from "axios";
+import { Image } from "react-native";
 
 class App extends Component {
   state = {
