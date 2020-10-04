@@ -13,7 +13,10 @@ class Header extends Component {
             <td style={{ width: "67px" }}></td>
 
             <td>
-              <img src={HeaderIcon} width="30px" />
+              <img
+                src="https://uploads.codesandbox.io/uploads/user/927c06c2-eee9-402d-be30-5df3ec015b1b/xa2b-HeaderIcon.png"
+                width="30px"
+              />
             </td>
             <td></td>
             <td>Weather</td>

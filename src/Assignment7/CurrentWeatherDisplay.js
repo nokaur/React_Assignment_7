@@ -59,7 +59,7 @@ class CurrentDisplay extends Component {
             <td></td>
           </tr>
           <tr style={{ textAlign: "left" }}>
-            <td style={{ textAlign: "right", width: "120px" }}>
+            <td style={{ textAlign: "right", width: "110px" }}>
               <img
                 src={`https://openweathermap.org/img/w/${this.props.Weather.Icon}.png`}
               />
