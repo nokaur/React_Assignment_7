@@ -47,14 +47,19 @@ class CurrentDisplay extends Component {
           <tr>
             <td colSpan="2" style={{ fontSize: "12px" }}>
               {" "}
-              {this.props.Weather.Temp_Max} &deg; |{" "}
-              {this.props.Weather.Temp_Min} &deg;
+              {Math.round(
+                parseFloat(this.props.Weather.Temp_Max) - 273.15
+              )}{" "}
+              &deg; |{" "}
+              {Math.round(parseFloat(this.props.Weather.Temp_Min) - 273.15)}{" "}
+              &deg;
             </td>
             <td></td>
           </tr>
           <tr>
             <td colSpan="2" style={{ fontSize: "25px" }}>
-              {this.props.Weather.Temperature} &deg;c
+              {Math.round(parseFloat(this.props.Weather.Temperature) - 273.15)}{" "}
+              &deg;c
             </td>
             <td></td>
           </tr>

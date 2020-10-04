@@ -1,57 +1,63 @@
+import { relativeTimeRounding } from "moment";
 import React, { Component } from "react";
 
+const api_key = "2e6f9563a63d5a52691225e9e4bffd29";
 class DailyDisplay extends Component {
-  groupByDay = (data) => {
-    return data.reduce((list, item) => {
-      const date = item.dt.substr(0, 10);
-      list[date] = list[date] || [];
-      list[date].push(item);
-      return list;
+  state = {
+    dailydata: []
+  };
+  getDailyForecast = async (e) => {
+    //var time = `${date}`.split(" GMT")[0];
+    const Lat = `${this.props.DailyForecast.Latitude}`;
+
+    const Long = `${this.props.DailyForecast.Longitude}`;
+    // e.PreventDefault();
+    const api_call = await fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${Lat}&lon=${Long}&appid=${api_key}`
+    );
+    const data = await api_call.json();
+    const daily = data.list.filter((reading) =>
+      reading.dt_txt.includes("18:00:00")
+    );
+    //console.log(daily);
+    this.setState({
+      dailydata: daily
     });
   };
+  // formatDayCards = () => {
+  //   return this.state.dailydata.map((reading, index) => (
+  //     <div>
+  //       <table>
+  //         <tr key={index}>
+  //           <td>{reading}</td>
+  //         </tr>
+  //       </table>
+  //     </div>
+  //   ));
+  // };
 
-  getDayInfo = (data) => {
-    const dayOfWeek = [
-      "sunday",
-      "monday",
-      "tuesday",
-      "wednesday",
-      "thursday",
-      "friday",
-      "saturday"
-    ];
-    return daysOfWeek[new Date(data[0].dt * 1000).getDay()];
-  };
-
-  getInfo = (
-    data,
-    max = [],
-    min = [],
-    temp = [],
-    condition = [],
-    description = []
-  ) => {
-    data.map((item) => {
-      max.push(item.main.temp_max);
-      min.push(item.main.temp_min);
-      temp.push(item.main.temp);
-    });
-  };
+  wheatherDetails = (d) => {};
   render() {
-    const { Daily } = this.props;
-
-    const tiles = Object.values(this.groupByDay(Daily));
-
-    const dailyTiles = tiles.length > 3 ? tiles.slice(0, 3) : tiles;
-
+    const details = this.state.dailydata.map((reading, index) => (
+      <div>
+        <table>
+          <tr key={index}>
+            <td>{reading.main.temp}</td>
+            <td>{reading.main.temp_min}</td>
+            <td>{reading.dt_txt}</td>
+            <td>{reading.icon}</td>
+          </tr>
+        </table>
+      </div>
+    ));
     return (
       <div>
-        {dailyTiles.map((item, i) => (
-          <div key={i} ref={`div-${i}`}>
-            <div>{this.getDayInfo(item)}</div>
-            {this.getInfo(item)}
-          </div>
-        ))}
+        <button onClick={this.getDailyForecast}></button>
+        <table>
+          <tr>
+            <td>{details}</td>
+          </tr>
+        </table>
       </div>
     );
   }

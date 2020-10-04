@@ -6,6 +6,8 @@ import axios from "axios";
 const api_key = "2e6f9563a63d5a52691225e9e4bffd29";
 class DashBoard extends Component {
   state = {
+    Latitude: undefined,
+    Longitude: undefined,
     City: undefined,
     Temp_Max: undefined,
     Temp_Min: undefined,
@@ -28,6 +30,8 @@ class DashBoard extends Component {
     const data = await api_call.json();
     console.log(data);
     this.setState({
+      Latitude: this.props.Location.Latitude,
+      Longitude: this.props.Location.Longitude,
       City: data.name,
       Temp_Max: data.main.temp_max,
       Temp_Min: data.main.temp_min,
@@ -49,7 +53,7 @@ class DashBoard extends Component {
         <p>{this.props.Location.Longitude}</p>*/}
         <button onClick={this.getWeather}>Get Weather</button>
         <CurrentDisplay Weather={this.state} />
-        <DailyDisplay Daily={this.state} />
+        <DailyDisplay DailyForecast={this.state} />
         <HourlyDisplay />
       </div>
     );
