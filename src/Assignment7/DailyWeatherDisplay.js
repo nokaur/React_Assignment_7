@@ -11,7 +11,7 @@ class DailyDisplay extends Component {
     const Lat = `${this.props.DailyForecast.Latitude}`;
 
     const Long = `${this.props.DailyForecast.Longitude}`;
-    // e.PreventDefault();
+    //e.PreventDefault();
     const api_call = await fetch(
       `https://api.openweathermap.org/data/2.5/forecast?lat=${Lat}&lon=${Long}&appid=${api_key}`
     );
@@ -42,10 +42,30 @@ class DailyDisplay extends Component {
       <div>
         <table>
           <tr key={index}>
-            <td>{reading.main.temp}</td>
-            <td>{reading.main.temp_min}</td>
-            <td>{reading.dt_txt}</td>
-            <td>{reading.icon}</td>
+            <td>
+              <table>
+                <tr>
+                  <td>
+                    <tr>
+                      <td>{reading.main.temp}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <img
+                          src={`https://openweathermap.org/img/w/${reading.weather[0].icon}.png`}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>{reading.main.temp_min}</td>
+                    </tr>
+                    <tr>
+                      <td>{reading.dt_txt}</td>
+                    </tr>
+                  </td>
+                </tr>
+              </table>
+            </td>
           </tr>
         </table>
       </div>
