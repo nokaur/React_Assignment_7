@@ -33,33 +33,18 @@ class DailyDisplay extends Component {
   // };
   wheatherDetails = (d) => {};
   render() {
+    //const i=0;
     const details = this.state.dailydata.map((reading, index) => (
-      <div>
+      <div style={{ display: "inline" }}>
         <table>
           <tr key={index}>
             <td>
-              <table>
-                <tr>
-                  <td>
-                    <tr>
-                      <td>{reading.main.temp}</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img
-                          src={`https://openweathermap.org/img/w/${reading.weather[0].icon}.png`}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>{reading.main.temp_min}</td>
-                    </tr>
-                    <tr>
-                      <td>{reading.dt_txt}</td>
-                    </tr>
-                  </td>
-                </tr>
-              </table>
+              {reading.main.temp}
+              <img
+                src={`https://openweathermap.org/img/w/${reading.weather[0].icon}.png`}
+              />
+              {reading.main.temp_min}
+              {reading.dt_txt}
             </td>
           </tr>
         </table>

@@ -28,7 +28,7 @@ class DashBoard extends Component {
       `https://api.openweathermap.org/data/2.5/weather?lat=${Lat}&lon=${Long}&appid=${api_key}`
     );
     const data = await api_call.json();
-    console.log(data);
+
     this.setState({
       Latitude: this.props.Location.Latitude,
       Longitude: this.props.Location.Longitude,
@@ -54,7 +54,7 @@ class DashBoard extends Component {
         <button onClick={this.getWeather}>Get Weather</button>
         <CurrentDisplay Weather={this.state} />
         <DailyDisplay DailyForecast={this.state} />
-        <HourlyDisplay />
+        <HourlyDisplay HourlyForecast={this.state} />
       </div>
     );
   }
