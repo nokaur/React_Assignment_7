@@ -1,5 +1,6 @@
 import { relativeTimeRounding } from "moment";
 import React, { Component } from "react";
+// import DayCard from "./DayCard";
 
 const api_key = "2e6f9563a63d5a52691225e9e4bffd29";
 class DailyDisplay extends Component {
@@ -24,18 +25,12 @@ class DailyDisplay extends Component {
       dailydata: daily
     });
   };
+
   // formatDayCards = () => {
-  //   return this.state.dailydata.map((reading, index) => (
-  //     <div>
-  //       <table>
-  //         <tr key={index}>
-  //           <td>{reading}</td>
-  //         </tr>
-  //       </table>
-  //     </div>
+  //   return this.state.dailyData.map((reading, index) => (
+  //     <DayCard reading={reading} key={index} />
   //   ));
   // };
-
   wheatherDetails = (d) => {};
   render() {
     const details = this.state.dailydata.map((reading, index) => (
