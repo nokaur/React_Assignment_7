@@ -1,7 +1,9 @@
 import { relativeTimeRounding } from "moment";
 import React, { Component } from "react";
-// import DayCard from "./DayCard";
+import Carousel from "react-bootstrap/Carousel";
+import { Image, View, ScrollView } from "react-native";
 
+var moment = require("moment");
 const api_key = "2e6f9563a63d5a52691225e9e4bffd29";
 class DailyDisplay extends Component {
   state = {
@@ -14,50 +16,64 @@ class DailyDisplay extends Component {
     const Long = `${this.props.DailyForecast.Longitude}`;
     //e.PreventDefault();
     const api_call = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${Lat}&lon=${Long}&appid=${api_key}`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${Lat}&lon=${Long}&cnt=5&units=metric&appid=${api_key}`
     );
     const data = await api_call.json();
-    const daily = data.list.filter((reading) =>
-      reading.dt_txt.includes("18:00:00")
-    );
+    // const daily = data.list.filter((reading) =>
+    //   reading.dt_txt.includes("18:00:00")
+    // );
     //console.log(daily);
     this.setState({
-      dailydata: daily
+      dailydata: data.list
     });
   };
 
   // formatDayCards = () => {
-  //   return this.state.dailyData.map((reading, index) => (
-  //     <DayCard reading={reading} key={index} />
-  //   ));
+  //   // return this.state.dailydata.map((reading, index) => (
+  //   //   <DayCard reading={reading} key={index} />
+  //   // ));
   // };
   wheatherDetails = (d) => {};
   render() {
-    //const i=0;
-    const details = this.state.dailydata.map((reading, index) => (
-      <div style={{ display: "inline" }}>
-        <table>
-          <tr key={index}>
-            <td>
-              {reading.main.temp}
-              <img
-                src={`https://openweathermap.org/img/w/${reading.weather[0].icon}.png`}
-              />
-              {reading.main.temp_min}
-              {reading.dt_txt}
-            </td>
-          </tr>
-        </table>
-      </div>
-    ));
+    let newDate = new Date();
+    {
+      this.getDailyForecast();
+    }
+    // const weekday = `${this.state.dailydata.dt_txt}` * 1000;
+    // newDate.setTime(weekday);
     return (
       <div>
-        <button onClick={this.getDailyForecast}></button>
-        <table>
-          <tr>
-            <td>{details}</td>
-          </tr>
-        </table>
+        {/* <button onClick={this.getDailyForecast}></button> */}
+
+        <View>
+          <ScrollView
+            horizontal={true}
+            pagingEnabled
+            contentContainerStyle={{ width: "160" }}
+            showHorizontalScrollIndicator={false}
+          >
+            {this.state.dailydata.map((reading, index) => (
+              <div>
+                <div>
+                  <h4>{moment(reading.dt * 1000).format("dddd")}</h4>
+                  <p>{moment(reading.dt * 1000).format("MMMM Do")}</p>
+                  {/* <i className={imgURL}></i> */}
+                  <h3>
+                    {Math.round(parseFloat(reading.main.temp) - 273.15)} °C
+                  </h3>
+                  <div>
+                    <p>
+                      <img
+                        src={`https://openweathermap.org/img/w/${reading.weather[0].icon}.png`}
+                      />
+                    </p>
+                    <p>{reading.weather[0].description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </ScrollView>
+        </View>
       </div>
     );
   }

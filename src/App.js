@@ -28,12 +28,13 @@ class App extends Component {
     });
   };
   render() {
-    // {
-    //   this.getLocation();
-    // }
+    {
+      this.getLocation()
+    }
     return (
       <div className="App">
-        <button onClick={this.getLocation}>Get Location</button>
+        {/* <button onClick={this.getLocation}>Get Location</button> */}
+        {/* {this.getLocation()} */}
         <Header />
         <DashBoard Location={this.state} />
       </div>

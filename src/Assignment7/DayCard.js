@@ -1,28 +1,41 @@
-// import React from "react";
-// var moment = require("moment");
+import React from "react";
+import Carousel from "react-bootstrap/Carousel";
+import { Image, View, ScrollView } from "react-native";
+var moment = require("moment");
 
-// const DayCard = ({ reading }) => {
-//   let newDate = new Date();
-//   const weekday = reading.dt * 1000;
-//   newDate.setTime(weekday);
+const DayCard = ({ reading }) => {
+  let newDate = new Date();
+  const weekday = reading.dt * 1000;
+  newDate.setTime(weekday);
 
-//   const imgURL = `owf owf-${reading.weather[0].id} owf-5x`;
+  const imgURL = `owf owf-${reading.weather[0].id} owf-5x`;
 
-//   return (
-//     <div className="col-sm-2">
-//       <div className="card">
-//         <h3 className="card-title">{moment(newDate).format("dddd")}</h3>
-//         <p className="text-muted">
-//           {moment(newDate).format("MMMM Do, h:mm a")}
-//         </p>
-//         <i className={imgURL}></i>
-//         <h2>{Math.round(reading.main.temp)} °F</h2>
-//         <div className="card-body">
-//           <p className="card-text">{reading.weather[0].description}</p>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+  return (
+    <View>
+      <ScrollView
+        horizontal={true}
+        pagingEnabled
+        contentContainerStyle={{ width: "150" }}
+      >
+        <div>
+          <div>
+            <h3>{moment(newDate).format("dddd")}</h3>
+            <p>{moment(newDate).format("MMMM Do, h:mm a")}</p>
+            {/* <i className={imgURL}></i> */}
+            <h2>{Math.round(parseFloat(reading.main.temp) - 273.15)} °C</h2>
+            <div>
+              <p>
+                <img
+                  src={`https://openweathermap.org/img/w/${reading.weather[0].icon}.png`}
+                />
+              </p>
+              <p>{reading.weather[0].description}</p>
+            </div>
+          </div>
+        </div>
+      </ScrollView>
+    </View>
+  );
+};
 
-// export default DayCard;
+export default DayCard;

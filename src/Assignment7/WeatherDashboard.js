@@ -25,7 +25,7 @@ class DashBoard extends Component {
     const Long = this.props.Location.Longitude;
     // e.PreventDefault();
     const api_call = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${Lat}&lon=${Long}&appid=${api_key}`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${Lat}&lon=${Long}&cnt=1&units=metric&appid=${api_key}`
     );
     const data = await api_call.json();
 
@@ -44,14 +44,15 @@ class DashBoard extends Component {
     });
   };
   render() {
-    // {
-    //   this.getWeather();
-    // }
+    {
+      this.getWeather()
+    }
     return (
       <div className="dashboard">
         {/* <p>{this.props.Location.Latitude}</p>
         <p>{this.props.Location.Longitude}</p>*/}
-        <button onClick={this.getWeather}>Get Weather</button>
+        {/* <button onClick={this.getWeather}>Get Weather</button> */}
+        {/* {this.getWeather()} */}
         <CurrentDisplay Weather={this.state} />
         <DailyDisplay DailyForecast={this.state} />
         <HourlyDisplay HourlyForecast={this.state} />
