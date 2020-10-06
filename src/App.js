@@ -11,6 +11,11 @@ class App extends Component {
     Latitude: undefined,
     Longitude: undefined
   };
+  componentDidMount = () => {
+    {
+      this.getLocation();
+    }
+  };
 
   getLocation = () => {
     if (navigator.geolocation) {
@@ -28,13 +33,8 @@ class App extends Component {
     });
   };
   render() {
-    {
-      this.getLocation()
-    }
     return (
       <div className="App">
-        {/* <button onClick={this.getLocation}>Get Location</button> */}
-        {/* {this.getLocation()} */}
         <Header />
         <DashBoard Location={this.state} />
       </div>

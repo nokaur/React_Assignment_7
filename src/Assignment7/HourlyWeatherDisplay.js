@@ -10,6 +10,11 @@ class HourlyDisplay extends Component {
   state = {
     hourlyData: []
   };
+  componentDidMount = () => {
+    {
+      this.getHourlyForecast();
+    }
+  };
   getHourlyForecast = async (e) => {
     //var time = `${date}`.split(" GMT")[0];
     const Lat = `${this.props.HourlyForecast.Latitude}`;
@@ -57,9 +62,6 @@ class HourlyDisplay extends Component {
   //   );
   // }
   render() {
-    {
-      this.getHourlyForecast();
-    }
     let newDate = new Date();
     // const weekday = `${this.state.dailydata.dt_txt}` * 1000;
     // newDate.setTime(weekday);

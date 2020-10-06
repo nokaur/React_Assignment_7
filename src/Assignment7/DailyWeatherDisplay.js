@@ -9,6 +9,11 @@ class DailyDisplay extends Component {
   state = {
     dailydata: []
   };
+  componentDidMount = () => {
+    {
+      this.getDailyForecast();
+    }
+  };
   getDailyForecast = async (e) => {
     //var time = `${date}`.split(" GMT")[0];
     const Lat = `${this.props.DailyForecast.Latitude}`;
@@ -36,9 +41,7 @@ class DailyDisplay extends Component {
   wheatherDetails = (d) => {};
   render() {
     let newDate = new Date();
-    {
-      this.getDailyForecast();
-    }
+   
     // const weekday = `${this.state.dailydata.dt_txt}` * 1000;
     // newDate.setTime(weekday);
     return (
